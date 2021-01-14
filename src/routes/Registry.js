@@ -22,6 +22,20 @@ function Registry(){
 
     },[textInput])
 
+    const removeItem = (index)=>{
+        let newData = [...registryData]
+        newData.splice(index,1)
+        setRegistryData(newData)
+    }
+
+    const editItem = (index)=>{
+        if(error) return;
+        let newData = [...registryData]
+        newData[index] =textInput
+        setRegistryData(newData)
+    }
+
+
     return (
         <div>
             <h1>Home</h1>
@@ -33,6 +47,19 @@ function Registry(){
             <input type = "submit" value="submit"/>
             </form>
             {error?<span style={{color:"red"}}>Error Occured.</span>: null}
+        {
+            registryData.map((item,index)=>{
+                return (
+                <li key={index}>{item}
+                 <button onClick={()=>removeItem(index)}>Remove</button>
+                 <button onClick={()=>editItem(index)}>Update</button>
+
+                 </li>
+                )
+            }
+            )
+        }
+        
         </div>
     )
 }
